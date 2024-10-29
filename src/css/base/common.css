@@ -9,3 +9,7 @@ body {
     font-size: 20px;
     border-color: blue;
 }
+
+.list__img {
+    width: 400px;
+}
