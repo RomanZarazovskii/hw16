@@ -2,6 +2,7 @@ import fetchCountries from './js/fetchCountries';
 import debounce from 'lodash.debounce';
 import { alert, error as notifyError, info as notifyInfo } from '@pnotify/core';
 import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
 
 const input = document.getElementById('input');
 const list = document.getElementById('list');
@@ -20,7 +21,7 @@ function onInputChange(e) {
   fetchCountries(inputValue)
     .then(fetchResponse)
     .catch(error => {
-      notifyError(`Something wrong ${error}`);
+      notifyError(`Something went wrong ${error}`);
     });
 }
 
@@ -38,14 +39,43 @@ function renderCountryList(countryList) {
 }
 
 function fetchResponse(countries) {
-  if (countries.length >= 1 && countries.length <= 10) {
+  clearData();
+  if (countries.length > 1 && countries.length <= 10) {
     const countryList = countries
       .map(country => {
+        console.log(country);
         return `
-      <li><img class="list__img" src="${country.flags.svg}"><p>${country.name.official}</p></li>
+      <li class="country__item"><img class="list__img" src="${country.flags.svg}"><p class="country__item__text"><b>${country.name.common}</b></p></li>
       `;
       })
       .join('');
     renderCountryList(countryList);
+  } else if (countries.length === 1) {
+    const countryInfo = countries
+      .map(country => {
+        return `
+        <h1 class="title"><b>${country.name.common}</b></h1>
+      <div class="country__thumb">
+        <div class="country__content">
+          <p class="country__capital"><b>Capital:</b> ${country.capital}</p>
+          <p class="country__population">
+            <b>Population:</b> ${country.population}
+          </p>
+          <p class="country__languages">
+            <b>Languages:</b>${Object.values(country.languages)}
+          </p>
+        </div>
+        <img class="list__img" src="${country.flags.svg}">
+      </div>
+      `;
+      })
+      .join('');
+    renderCountry(countryInfo);
+  } else {
+    notifyInfo('Too many matches');
   }
+}
+
+function error() {
+  notifyError("There's no country with this name");
 }

@@ -1,15 +1,65 @@
 body {
     padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #111;
+    font-size: 18px;
+    letter-spacing: -0.28px;
+}
+
+ul {
+    list-style: none;
 }
 
 #input {
     padding: 8px;
     max-width: 320px;
     margin-bottom: 20px;
-    font-size: 20px;
+    font-size: 16px;
     border-color: blue;
 }
 
 .list__img {
-    width: 400px;
+    width: 300px;
+}
+
+.country__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.country__item:not(:last-child) {
+    margin-bottom: 40px;
+}
+
+.country__item__text {
+    font-size: 20px;
+}
+
+.container {
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.country__thumb {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.country__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
 }
